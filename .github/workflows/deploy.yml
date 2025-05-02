@@ -2,7 +2,7 @@ name: Build and Deploy Spring Boot App to EC2
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ]  
 
 jobs:
   deploy:
@@ -35,4 +35,3 @@ jobs:
         scp Boot01/target/*.jar ${{ secrets.EC2_HOST }}:/home/ec2-user/
         ssh ${{ secrets.EC2_HOST }} 'pkill -f .jar || true'
         ssh ${{ secrets.EC2_HOST }} 'nohup java -jar /home/ec2-user/*.jar > app.log 2>&1 &'
-
