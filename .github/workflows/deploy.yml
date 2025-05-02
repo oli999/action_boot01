@@ -23,6 +23,9 @@ jobs:
         cd Boot01
         mvn clean package -DskipTests
 
+    - name: 🔍 DEBUG: Print EC2_HOST
+      run: echo "::notice ::EC2_HOST = ${{ secrets.EC2_HOST }}"
+
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
