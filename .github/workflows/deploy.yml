@@ -35,3 +35,5 @@ jobs:
         scp Boot01/target/*.jar ${{ secrets.EC2_HOST }}:/home/ec2-user/
         ssh ${{ secrets.EC2_HOST }} 'pkill -f .jar || true'
         ssh ${{ secrets.EC2_HOST }} 'nohup java -jar /home/ec2-user/*.jar > app.log 2>&1 &'
+    - name: Print EC2_HOST
+      run: echo "🔗 EC2_HOST is: ${{ secrets.EC2_HOST }}"
