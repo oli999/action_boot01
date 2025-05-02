@@ -32,7 +32,9 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+        # EC2_HOST에서 IP만 추출해서 ssh-keyscan에 전달
+        HOST=$(echo "${{ secrets.EC2_HOST }}" | cut -d'@' -f2)
+        ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
     - name: Deploy JAR to EC2 and run
       run: |
