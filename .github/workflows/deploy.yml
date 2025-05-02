@@ -35,5 +35,9 @@ jobs:
       run: |
         JAR_NAME=Boot01-0.0.1-SNAPSHOT.jar
         scp Boot01/target/$JAR_NAME ${{ secrets.EC2_HOST }}:/home/ec2-user/
-        ssh ${{ secrets.EC2_HOST }} "pkill -f \$JAR_NAME || true"
-        ssh ${{ secrets.EC2_HOST }} "nohup java -jar /home/ec2-user/\$JAR_NAME > app.log 2>&1 &"
+
+        ssh ${{ secrets.EC2_HOST }} << EOF
+          pkill -f $JAR_NAME || true
+          cd /home/ec2-user
+          nohup java -jar $JAR_NAME > app.log 2>&1 &
+        EOF
