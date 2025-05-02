@@ -23,12 +23,6 @@ jobs:
         cd Boot01
         mvn clean package -DskipTests
 
-    - name: 🔍 DEBUG: Print EC2_HOST
-      env:
-        EC2_HOST_VALUE: ${{ secrets.EC2_HOST }}
-      run: |
-        echo "EC2_HOST is $EC2_HOST_VALUE"
-
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
